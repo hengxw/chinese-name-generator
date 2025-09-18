@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>中文取名神器 - 专业宝宝起名工具</title>
+    <meta name="description" content="专业的中文取名工具，根据姓氏、性别、生辰八字等生成吉祥好名">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 头部标题 -->
+        <header class="header">
+            <h1>🌟 中文取名神器</h1>
+            <p class="subtitle">为您的宝宝起一个好名字</p>
+        </header>
+
+        <!-- 取名表单 -->
+        <main class="main-content">
+            <div class="form-container">
+                <div class="input-group">
+                    <label for="surname">姓氏 *</label>
+                    <input type="text" id="surname" placeholder="请输入姓氏，如：张、李、王" maxlength="2">
+                </div>
+
+                <div class="input-group">
+                    <label>性别 *</label>
+                    <div class="gender-options">
+                        <label class="radio-label">
+                            <input type="radio" name="gender" value="male" checked>
+                            <span>男孩</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="gender" value="female">
+                            <span>女孩</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="birthDate">出生日期 (可选)</label>
+                    <input type="date" id="birthDate">
+                </div>
+
+                <div class="input-group">
+                    <label>取名偏好 (可选)</label>
+                    <div class="preference-options">
+                        <label class="checkbox-label">
+                            <input type="checkbox" value="traditional">
+                            <span>传统文化</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" value="modern">
+                            <span>现代时尚</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" value="literary">
+                            <span>文学诗意</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" value="lucky">
+                            <span>吉祥如意</span>
+                        </label>
+                    </div>
+                </div>
+
+                <button class="generate-btn" onclick="generateNames()">
+                    ✨ 开始取名
+                </button>
+            </div>
+
+            <!-- 结果展示区域 -->
+            <div class="results-container" id="resultsContainer" style="display: none;">
+                <h2>为您推荐的好名字</h2>
+                <div class="names-grid" id="namesGrid"></div>
+
+                <div class="regenerate-section">
+                    <button class="regenerate-btn" onclick="generateNames()">
+                        🔄 重新生成
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <!-- 底部信息 -->
+        <footer class="footer">
+            <p>💡 专业取名，吉祥好运 | 让好名字伴随一生</p>
+        </footer>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
