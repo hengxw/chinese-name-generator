@@ -375,17 +375,55 @@ document.addEventListener('DOMContentLoaded', function() {
     // 姓氏输入框事件
     const surnameInput = document.getElementById('surname');
 
-    // 添加输入限制
+    // 输入法状态跟踪
+    let isComposing = false;
+
+    // 输入法开始事件
+    surnameInput.addEventListener('compositionstart', function() {
+        isComposing = true;
+        console.log('拼音输入开始');
+    });
+
+    // 输入法结束事件
+    surnameInput.addEventListener('compositionend', function() {
+        isComposing = false;
+        console.log('拼音输入结束，当前值:', this.value);
+        // 输入法结束后进行验证和限制
+        validateAndLimitInput.call(this);
+    });
+
+    // 输入事件处理
     surnameInput.addEventListener('input', function() {
-        // 只保留中文字符，但使用更宽泛的范围
+        console.log('Input event triggered, value:', this.value, 'isComposing:', isComposing);
+        // 只有在非输入法状态下才进行长度限制
+        if (!isComposing) {
+            validateAndLimitInput.call(this);
+        }
+    });
+
+    // 验证和限制输入的函数
+    function validateAndLimitInput() {
         let value = this.value;
-        // 移除非中文字符（保留最常用的中文字符范围）
-        value = value.replace(/[^\u4e00-\u9fa5]/g, '');
+
+        // 移除非中文字符（包含更广泛的中文字符范围）
+        value = value.replace(/[^\u4e00-\u9fff\u3400-\u4dbf]/g, '');
+
         // 限制最大长度为2个字符
         if (value.length > 2) {
             value = value.substring(0, 2);
         }
-        this.value = value;
+
+        // 只有当值发生变化时才更新
+        if (this.value !== value) {
+            this.value = value;
+            console.log('输入已清理和限制，最终值:', value);
+        }
+    }
+
+    // 当失去焦点时再次验证
+    surnameInput.addEventListener('blur', function() {
+        console.log('失去焦点时验证，当前值:', this.value);
+        validateAndLimitInput.call(this);
     });
 
     // 回车键触发生成
