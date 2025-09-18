@@ -381,20 +381,17 @@ document.addEventListener('DOMContentLoaded', function() {
     // 输入法开始事件
     surnameInput.addEventListener('compositionstart', function() {
         isComposing = true;
-        console.log('拼音输入开始');
     });
 
     // 输入法结束事件
     surnameInput.addEventListener('compositionend', function() {
         isComposing = false;
-        console.log('拼音输入结束，当前值:', this.value);
         // 输入法结束后进行验证和限制
         validateAndLimitInput.call(this);
     });
 
     // 输入事件处理
     surnameInput.addEventListener('input', function() {
-        console.log('Input event triggered, value:', this.value, 'isComposing:', isComposing);
         // 只有在非输入法状态下才进行长度限制
         if (!isComposing) {
             validateAndLimitInput.call(this);
@@ -416,13 +413,11 @@ document.addEventListener('DOMContentLoaded', function() {
         // 只有当值发生变化时才更新
         if (this.value !== value) {
             this.value = value;
-            console.log('输入已清理和限制，最终值:', value);
         }
     }
 
     // 当失去焦点时再次验证
     surnameInput.addEventListener('blur', function() {
-        console.log('失去焦点时验证，当前值:', this.value);
         validateAndLimitInput.call(this);
     });
 
